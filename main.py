@@ -159,3 +159,13 @@ soros_ewm_returns= soros_fund.ewm(halflife='21 days', times = soros_fund.index).
 #
 # a.plot()
 # plt.show()
+
+# Sharpe ratios
+
+sharpe_ratios = (combined_return_df.mean() *252) / (combined_return_df.std() * np.sqrt(252))
+
+print(f'\n\n SHARPE RATIOS: \n\n {sharpe_ratios}')
+
+better_than_SP500 = round(sharpe_ratios[sharpe_ratios > 0.648267],4)
+
+print(f'\n\n The following portfolios had a betters sharpe ratio than the SP500 \n\n {better_than_SP500}')
