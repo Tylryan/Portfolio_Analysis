@@ -18,19 +18,19 @@ sp500_historical = pd.read_csv('Resources/' + files[4], index_col='Date', parse_
 algo_returns = pd.read_csv('Resources/' + files[1], index_col='Date', parse_dates=True, infer_datetime_format=True).sort_index()
 whale_returns = pd.read_csv('Resources/' + files[5], index_col='Date', parse_dates=True, infer_datetime_format=True).sort_index()
 
-# Read and clean Whale Returns
+#! Read and clean Whale Returns
 print(whale_returns)
 print(whale_returns.isna().sum())
 whale_returns.dropna(inplace = True)
 print(whale_returns.isna().sum())
 
-# Read and clean Algo Returns
+#! Read and clean Algo Returns
 print(algo_returns)
 print(algo_returns.isna().sum())
 algo_returns.dropna(inplace = True)
 print(algo_returns.isna().sum())
 
-# Read and clean SP500 historical
+#! Read and clean SP500 historical
 print(sp500_historical)
 print(sp500_historical.isna().sum())
 sp500_historical.dropna(inplace = True)
@@ -38,17 +38,17 @@ print(sp500_historical.isna().sum())
 
 print(sp500_historical.head())
 
-## Removing the dollar signs from SP500
+#! Removing the dollar signs from SP500
 
 sp500_historical= sp500_historical.apply(lambda x: x.str.replace('$','').apply(lambda x: float(x))).dropna()
 print(sp500_historical.head())
 
-## Finding the sp500 returns
+#! Finding the sp500 returns
 sp500_returns = sp500_historical.pct_change().dropna()
 sp500_returns.columns = ['SP500 Returns']
 print(sp500_returns)
 
-# Combine the three return dataframes
+#! Combine the three return dataframes
 
 combined_return_df = pd.concat([sp500_returns,whale_returns,algo_returns], axis = 'columns',join = 'inner')
 print(combined_return_df)
@@ -65,9 +65,9 @@ print(combined_return_df)
 #
 # plt.show()
 
-# Risk analysis
+#* Risk analysis
 
-## Create a boxplot of the portfolios
+#! Create a boxplot of the portfolios
 #
 # combined_return_df.boxplot(figsize=(20,10), grid = True)
 # title = plt.title('Box Plot of the Return of All Portfolios')
@@ -77,7 +77,7 @@ print(combined_return_df)
 
 
 
-## Calculating the daily standard deviations of all portfolio returns
+#! Calculating the daily standard deviations of all portfolio returns
 
 combined_daily_std = combined_return_df.std()
 sp500_daily_std = combined_daily_std.iloc[1]
@@ -105,31 +105,31 @@ print(f'The following portfolios are less risky than the SP500:\n\n'
 combined_annualized_std = combined_daily_std * np.sqrt(250)
 print(combined_annualized_std)
 
-# Rolling statistics
+#* Rolling statistics
 
-## 21-day rolling standard deviation
+#! 21-day rolling standard deviation
 
-# rolling_std_21 = combined_return_df.rolling(window = 21).std()
-# rolling_std_21.plot(figsize = (20,10))
-# ylabel = plt.ylabel('Standard Deviation')
-# title = plt.title('21-Day Rolling Standard Deviation of All Portfolios')
-# plt.show()
+rolling_std_21 = combined_return_df.rolling(window = 21).std()
+rolling_std_21.plot(figsize = (20,10))
+ylabel = plt.ylabel('Standard Deviation')
+title = plt.title('21-Day Rolling Standard Deviation of All Portfolios')
+plt.show()
 
-## Calculating and plotting the correlation of all the portfolios.
-# correlation = combined_return_df.corr()
-# sns.heatmap(correlation,vmax = -1, vmin = 1, annot = True)
-# plt.show()
+#! Calculating and plotting the correlation of all the portfolios.
+correlation = combined_return_df.corr()
+sns.heatmap(correlation,vmax = -1, vmin = 1, annot = True)
+plt.show()
 
-# Calculate and plot Beta for each portfolio.
+#! Calculate and plot Beta for each portfolio.
 
-## Finding each portfolio
+#! Finding each portfolio
 soros_fund = whale_returns.iloc[:,0]
 paulson_fund = whale_returns.iloc[:,1]
 tiger_fund = whale_returns.iloc[:,2]
 berkshire_fund = whale_returns.iloc[:,3]
 
 
-## Finding the variance and covariance and beta.
+#! Finding the variance and covariance and beta.
 sp500_variance = sp500_returns['SP500 Returns'].var()
 
 algo1_beta = algo_returns['Algo 1'].cov(sp500_returns['SP500 Returns']) / sp500_variance
@@ -139,7 +139,7 @@ paulson_beta = paulson_fund.cov(sp500_returns['SP500 Returns']) / sp500_variance
 tiger_beta = tiger_fund.cov(sp500_returns['SP500 Returns']) / sp500_variance
 berkshire_beta = berkshire_fund.cov(sp500_returns['SP500 Returns']) / sp500_variance
 
-## Finding the 21-day rolling average beta for soros_fund
+#! Finding the 21-day rolling average beta for soros_fund
 
 soros_rolling_covar  = soros_fund.rolling(window = 21).cov(sp500_returns['SP500 Returns'])
 rolling_var = sp500_returns['SP500 Returns'].rolling(window = 21).var()
@@ -154,7 +154,7 @@ soros_rolling_beta = (soros_rolling_covar / rolling_var).dropna()
 # rolling_var = sp500_returns['SP500 Returns'].rolling(window = 21).var()
 
 
-#Exponentially Weighted Average of the returns of Soros's Fund.
+#! Exponentially Weighted Average of the returns of Soros's Fund.
 soros_ewm_returns= soros_fund.ewm(halflife='21 days', times = soros_fund.index).mean()
 #
 # a.plot()
@@ -169,3 +169,7 @@ print(f'\n\n SHARPE RATIOS: \n\n {sharpe_ratios}')
 better_than_SP500 = round(sharpe_ratios[sharpe_ratios > 0.648267],4)
 
 print(f'\n\n The following portfolios had a betters sharpe ratio than the SP500 \n\n {better_than_SP500}')
+
+worse_than_SP500 = round(sharpe_ratios[sharpe_ratios < 0.648267],4)
+
+print(f'\n\n The following portfolios had a worse sharpe ratio than the SP500 \n\n {better_than_SP500}')
