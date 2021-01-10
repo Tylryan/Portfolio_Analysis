@@ -172,4 +172,4 @@ print(f'\n\n The following portfolios had a betters sharpe ratio than the SP500 
 
 worse_than_SP500 = round(sharpe_ratios[sharpe_ratios < 0.648267],4)
 
-print(f'\n\n The following portfolios had a worse sharpe ratio than the SP500 \n\n {better_than_SP500}')
+print(f'\n\n The following portfolios had a worse sharpe ratio than the SP500 \n\n {worse_than_SP500}')
