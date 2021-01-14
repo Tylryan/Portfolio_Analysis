@@ -1,7 +1,7 @@
-![](http://localhost:8888/files/Images/results.png?_xsrf=2%7Cf4cfba1d%7Ca7f9fa840b376c8ba64b4a19ae026a7b%7C1609372787)
+![sorted_portfolio](https://raw.githubusercontent.com/Tylryan/Portfolio_Analysis/main/Images/results.png)
 # Conclusion
 ---
-The [sorted_portfolio](https://github.com/Tylryan/Portfolio_Analysis/blob/main/Images/results.png?raw=true) above is sorted by the sharpe ratio in decending order. The [Sharpe ratio](https://www.investopedia.com/terms/s/sharperatio.asp) essentially describes a portfolio's bang for the buck or risk adjusted return. The portfolio with the most bang for the buck was still Algo 1. Algo 1's Sharpe ratio was an impressive 1.38, which was 0.07 points less than my portfolio's ratio. Both Algo 1 and my Sharpe ratios were more than double the next contender; Berkshire.
+The sorted_portfolio above is sorted by the sharpe ratio in decending order. The [Sharpe ratio](https://www.investopedia.com/terms/s/sharperatio.asp) essentially describes a portfolio's bang for the buck or risk adjusted return. The portfolio with the most bang for the buck was still Algo 1. Algo 1's Sharpe ratio was an impressive 1.38, which was 0.07 points less than my portfolio's ratio. Both Algo 1 and my Sharpe ratios were more than double the next contender; Berkshire.
 
 ## Returns
 ---
