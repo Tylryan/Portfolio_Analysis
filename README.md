@@ -1,3 +1,25 @@
+# Portfolio Analysis
+---
+
+## Purpose
+---
+* This code will allow an investor to quickly compare the performance of various portfolios. 
+* It categorizes key performance measures such as Cumulative Return, Standard Deviation, Beta, and the Sharpe Ratio by "Very Low","Low","Moderate",'High', and "Very High". 
+* The summary dataframe at the bottom is grouped by portfolio and sorted by their Sharpe ratios in decending order. 
+* Within seconds after running the program, the user can see which portfolio is the best, and which portfolio is the worst.
+
+## How to use it
+---
+In its current state, the code only accepts csv files. So the user would have to download the csv file and let the code know where they are stored. 
+
+The user would also have to go in and change the names of the columns to represent the new files. In the future, I hope to change the code so that the user doesn't have to do this. 
+
+It would also be interesting to try and generate an automated report. In its current state, that is not possible. The user would have to write their own report at the bottom.
+
+However, because the code essentially has a report in the form of a dataframe at the bottom, a written report can be accomplished fairly quickly.
+
+# Homework Report
+---
 ![sorted_portfolio](https://raw.githubusercontent.com/Tylryan/Portfolio_Analysis/main/Images/results.png)
 # Conclusion
 ---
