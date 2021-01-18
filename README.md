@@ -5,7 +5,7 @@
 ---
 * This code will allow an investor to quickly compare the performance of various portfolios. 
 * It categorizes key performance measures such as Cumulative Return, Standard Deviation, Beta, and the Sharpe Ratio by "Very Low","Low","Moderate",'High', and "Very High". 
-* The summary dataframe at the bottom is grouped by portfolio and sorted by their Sharpe ratios in decending order. 
+* The summary dataframe at the bottom is grouped by portfolio and sorted by their Sharpe ratios in descending order. 
 * Within seconds after running the program, the user can see which portfolio is the best, and which portfolio is the worst.
 
 ## How to use it
